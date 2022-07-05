@@ -2,6 +2,7 @@ package com.example.kotlinjpa.service
 
 import com.example.kotlinjpa.config.exception.SameEmailException
 import com.example.kotlinjpa.domain.User
+import com.example.kotlinjpa.mock.MockUtil
 import com.example.kotlinjpa.repository.UserRepository
 import com.example.kotlinjpa.service.dto.UserDTO
 import org.junit.jupiter.api.Assertions
@@ -31,31 +32,21 @@ internal class UserServiceTest {
     @Test
     fun `회원가입 로직 성공 테스트 케이스`() {
 
-        val email = "test@namver.com"
-
-        val password = "123456"
-
-        val mock = User(email, password)
+        val mock = MockUtil.readJsonFileToClass("user.json", User::class.java) as User
 
         val isExists = false
 
-        BDDMockito.given(userRepository.existsByEmail(email))
-            .willReturn(isExists)
+        BDDMockito.given(userRepository.existsByEmail(mock.getEmail()!!)).willReturn(isExists)
 
-        BDDMockito.given(userRepository.save(any()))
-            .willReturn(mock)
+        BDDMockito.given(userRepository.save(any())).willReturn(mock)
 
-        val dto = UserDTO(email, password)
+        val dto = UserDTO(mock.getEmail()!!, mock.getPassword()!!)
 
         val entity = userService?.signUp(dto)
 
-        BDDMockito.then(userRepository)
-            .should(times(1))
-            .existsByEmail(email)
+        BDDMockito.then(userRepository).should(times(1)).existsByEmail(mock.getEmail()!!)
 
-        BDDMockito.then(userRepository)
-            .should(times(1))
-            .save(any())
+        BDDMockito.then(userRepository).should(times(1)).save(any())
 
         org.assertj.core.api.Assertions.assertThat(mock).isEqualTo(entity)
         Assertions.assertEquals(mock.getEmail(), entity?.getEmail())
@@ -65,15 +56,13 @@ internal class UserServiceTest {
     @Test
     fun `회원 가입 로직 테스트 케이스 SameEmailException`() {
 
-        val email = "test@namver.com"
+        val mock = MockUtil.readJsonFileToClass("user.json", User::class.java) as User
 
-        val password = "123456"
-
-        val dto = UserDTO(email, password)
+        val dto = UserDTO(mock.getEmail()!!, mock.getPassword()!!)
 
         val isExists = true
 
-        BDDMockito.given(userRepository.existsByEmail(email)).willReturn(isExists)
+        BDDMockito.given(userRepository.existsByEmail(mock.getEmail()!!)).willReturn(isExists)
 
         Assertions.assertThrows(SameEmailException::class.java, Executable {
             userService?.signUp(dto)

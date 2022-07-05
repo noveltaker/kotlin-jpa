@@ -1,6 +1,7 @@
 package com.example.kotlinjpa.respository
 
 import com.example.kotlinjpa.domain.User
+import com.example.kotlinjpa.mock.MockUtil
 import com.example.kotlinjpa.repository.UserRepository
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
@@ -21,11 +22,7 @@ internal class UserRepositoryTest {
     @Test
     fun `단일 유저 저장`() {
 
-        val email = "test@namver.com"
-
-        val password = "123456"
-
-        val mock = User(email, password)
+        val mock = MockUtil.readJsonFileToClass("user.json", User::class.java) as User
 
         val entity = userRepository.save(mock)
 
@@ -41,9 +38,8 @@ internal class UserRepositoryTest {
 
         @BeforeEach
         fun init() {
-            val email = "test@namver.com"
-            val password = "123456"
-            mock = userRepository.save(User(email, password))
+            val user = MockUtil.readJsonFileToClass("user.json", User::class.java) as User
+            mock = userRepository.save(user)
             userRepository.flush()
         }
 

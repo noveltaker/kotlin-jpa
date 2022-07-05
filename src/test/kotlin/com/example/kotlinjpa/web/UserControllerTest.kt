@@ -1,6 +1,7 @@
 package com.example.kotlinjpa.web
 
 import com.example.kotlinjpa.domain.User
+import com.example.kotlinjpa.mock.MockUtil
 import com.example.kotlinjpa.service.UserService
 import com.example.kotlinjpa.service.dto.UserDTO
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -41,13 +42,9 @@ internal class UserControllerTest {
     @Test
     fun `회`() {
 
-        val mockEmail = "test@naver.com"
+        val mock = MockUtil.readJsonFileToClass("user.json", User::class.java) as User
 
-        val mockPassword = "123456"
-
-        val mock = User(mockEmail, mockPassword)
-
-        val dto = UserDTO(mockEmail, mockPassword)
+        val dto = UserDTO(mock.getEmail()!!, mock.getPassword()!!)
 
         val objectMapper = ObjectMapper()
 
@@ -56,16 +53,13 @@ internal class UserControllerTest {
         BDDMockito.given(userService.signUp(dto)).willReturn(mock)
 
         val action = mockMcv?.perform(
-            post("/signup")
-                .content(content)
-                .contentType(MediaType.APPLICATION_JSON)
+            post("/signup").content(content).contentType(MediaType.APPLICATION_JSON)
         )?.andDo(print())
 
         BDDMockito.then(userService).should(times(1)).signUp(dto)
 
-        action?.andExpect(status().isCreated)
-            ?.andExpect(jsonPath("$['email']").value(mockEmail))
-            ?.andExpect(jsonPath("$['password']").value(mockPassword))
+        action?.andExpect(status().isCreated)?.andExpect(jsonPath("$['email']").value(mock.getEmail()))
+            ?.andExpect(jsonPath("$['password']").value(mock.getPassword()))
 
     }
 
