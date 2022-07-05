@@ -7,4 +7,8 @@ data class UserDTO constructor(
 ) {
 
     fun toEntity() = User(email, password)
+
+    fun getEmail() = this.email
+
+    fun getPassword() = this.password
 }
