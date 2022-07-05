@@ -57,6 +57,7 @@ internal class UserServiceTest {
             .should(times(1))
             .save(any())
 
+        org.assertj.core.api.Assertions.assertThat(mock).isEqualTo(entity)
         Assertions.assertEquals(mock.getEmail(), entity?.getEmail())
         Assertions.assertEquals(mock.getPassword(), entity?.getPassword())
     }
