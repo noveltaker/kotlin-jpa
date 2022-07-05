@@ -10,4 +10,8 @@ data class User constructor(
 ) {
 
     constructor(email: String, password: String) : this(null, email, password)
+
+    fun getEmail() = this.email
+
+    fun getPassword() = this.password
 }
