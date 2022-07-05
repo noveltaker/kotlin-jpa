@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 import javax.transaction.Transactional
 
 @Service
-class ReviewServiceImpl constructor(
+class ReviewServiceImpl(
     private val userRepository: UserRepository, private val reviewRepository: ReviewRepository
 ) : ReviewService {
 
