@@ -61,7 +61,7 @@ internal class ReviewControllerTest {
             MockMvcRequestBuilders.post("/review")
                 .content(content)
                 .contentType(MediaType.APPLICATION_JSON)
-        )?.andDo(MockMvcResultHandlers.print())
+        ).andDo(MockMvcResultHandlers.print())
 
         action.andExpect(status().isCreated)
             .andExpect(jsonPath("$['title']").value(jsonData["title"]))
