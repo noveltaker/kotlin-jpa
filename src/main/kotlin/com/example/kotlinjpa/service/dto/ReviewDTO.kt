@@ -12,4 +12,8 @@ data class ReviewDTO constructor(
     fun toEntity(user: User) = Review(title, content, user)
 
     fun getUserId() = this.userId
+
+    fun getTitle() = this.title
+
+    fun getContent() = this.content
 }
