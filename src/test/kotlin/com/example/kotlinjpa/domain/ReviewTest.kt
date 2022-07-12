@@ -1,7 +1,7 @@
 package com.example.kotlinjpa.domain
 
 import com.example.kotlinjpa.mock.MockUtil
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class ReviewTest {
