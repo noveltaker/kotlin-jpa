@@ -19,6 +19,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 @ExtendWith(SpringExtension::class)
@@ -56,7 +58,17 @@ internal class ReviewControllerTest {
         val content = objectMapper.writeValueAsString(dto)
 
         val action = mockMvc!!.perform(
-            MockMvcRequestBuilders.post("/review").content(content).contentType(MediaType.APPLICATION_JSON)
+            MockMvcRequestBuilders.post("/review")
+                .content(content)
+                .contentType(MediaType.APPLICATION_JSON)
         )?.andDo(MockMvcResultHandlers.print())
+
+        action.andExpect(status().isCreated)
+            .andExpect(jsonPath("$['title']").value(jsonData["title"]))
+            .andExpect(jsonPath("$['content']").value(jsonData["content"]))
+            .andExpect(jsonPath("$['user']['id']").value(user.getId()))
+            .andExpect(jsonPath("$['user']['email']").value(user.getEmail()))
+            .andExpect(jsonPath("$['user']['password']").value(user.getPassword()))
+
     }
 }
