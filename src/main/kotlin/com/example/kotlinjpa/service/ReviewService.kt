@@ -5,5 +5,5 @@ import com.example.kotlinjpa.service.dto.ReviewDTO
 
 interface ReviewService {
 
-    fun writeReview(dto: ReviewDTO) : Review
+    fun writeReview(dto: ReviewDTO?): Review
 }

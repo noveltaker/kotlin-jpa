@@ -8,11 +8,12 @@ import javax.transaction.Transactional
 
 @Service
 class ReviewServiceImpl(
-    private val userRepository: UserRepository, private val reviewRepository: ReviewRepository
+    private val userRepository: UserRepository,
+    private val reviewRepository: ReviewRepository
 ) : ReviewService {
 
     @Transactional
-    override fun writeReview(dto: ReviewDTO) = userRepository.findById(dto.getUserId())
+    override fun writeReview(dto: ReviewDTO?) = userRepository.findById(dto!!.getUserId())
         .orElseThrow { throw NullPointerException() }
         .let {
             reviewRepository.save(dto.toEntity(it))

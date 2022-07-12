@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test
 
 internal class UserTest {
 
-
     @Test
     fun `User 객체 생성자 테스트 케이스`() {
         val jsonFile = MockUtil.readJsonFileToClass("user.json", Map::class.java) as Map

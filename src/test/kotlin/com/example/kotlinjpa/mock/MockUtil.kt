@@ -19,6 +19,5 @@ class MockUtil {
 
             return objectMapper.readValue(text, ofClass)
         }
-
     }
 }

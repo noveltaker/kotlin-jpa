@@ -64,9 +64,11 @@ internal class UserServiceTest {
 
         BDDMockito.given(userRepository.existsByEmail(mock.getEmail()!!)).willReturn(isExists)
 
-        Assertions.assertThrows(SameEmailException::class.java, Executable {
-            userService?.signUp(dto)
-        })
-
+        Assertions.assertThrows(
+            SameEmailException::class.java,
+            Executable {
+                userService?.signUp(dto)
+            }
+        )
     }
 }

@@ -22,7 +22,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPat
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
-
 @ExtendWith(SpringExtension::class)
 @WebMvcTest(value = [UserController::class])
 @AutoConfigureMockMvc
@@ -33,14 +32,13 @@ internal class UserControllerTest {
     @MockBean
     private lateinit var userService: UserService
 
-
     @BeforeEach
     fun init() {
         mockMcv = MockMvcBuilders.standaloneSetup(UserController(userService)).build()
     }
 
     @Test
-    fun `회`() {
+    fun `회원가입 API`() {
 
         val mock = MockUtil.readJsonFileToClass("user.json", User::class.java) as User
 
@@ -60,7 +58,5 @@ internal class UserControllerTest {
 
         action?.andExpect(status().isCreated)?.andExpect(jsonPath("$['email']").value(mock.getEmail()))
             ?.andExpect(jsonPath("$['password']").value(mock.getPassword()))
-
     }
-
 }

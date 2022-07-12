@@ -55,7 +55,5 @@ internal class UserRepositoryTest {
             val isExists = userRepository.existsByEmail(mockEmail)
             Assertions.assertFalse(isExists)
         }
-
     }
-
 }
