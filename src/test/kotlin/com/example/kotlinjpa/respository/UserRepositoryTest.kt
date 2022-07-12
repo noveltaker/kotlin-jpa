@@ -19,16 +19,18 @@ internal class UserRepositoryTest {
     @Autowired
     private lateinit var userRepository: UserRepository
 
+    var entity: User? = null
+
     @Test
     fun `단일 유저 저장`() {
 
         val mock = MockUtil.readJsonFileToClass("user.json", User::class.java) as User
 
-        val entity = userRepository.save(mock)
+        entity = userRepository.save(mock)
 
-        Assertions.assertEquals(mock.getId(), entity.getId())
-        Assertions.assertEquals(mock.getEmail(), entity.getEmail())
-        Assertions.assertEquals(mock.getPassword(), entity.getPassword())
+        Assertions.assertEquals(mock.getId(), entity?.getId())
+        Assertions.assertEquals(mock.getEmail(), entity?.getEmail())
+        Assertions.assertEquals(mock.getPassword(), entity?.getPassword())
     }
 
     @Nested
