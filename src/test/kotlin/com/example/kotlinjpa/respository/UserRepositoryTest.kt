@@ -30,6 +30,7 @@ internal class UserRepositoryTest {
         Assertions.assertNotNull(entity.getId())
         Assertions.assertEquals(mock.getEmail(), entity.getEmail())
         Assertions.assertEquals(mock.getPassword(), entity.getPassword())
+        
     }
 
     @Nested
