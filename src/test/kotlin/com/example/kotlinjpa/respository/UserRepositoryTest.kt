@@ -27,10 +27,9 @@ internal class UserRepositoryTest {
 
         val entity = userRepository.save(mock)
 
-        Assertions.assertNotNull(entity.getId())
+        Assertions.assertEquals(mock.getId(), entity.getId())
         Assertions.assertEquals(mock.getEmail(), entity.getEmail())
         Assertions.assertEquals(mock.getPassword(), entity.getPassword())
-
     }
 
     @Nested
