@@ -22,9 +22,11 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-#      # Ktlint
-#      - name: Gradle Run Ktlint
-#        run: ./gradlew ktlintFormat
+      - name: Checked Code Format
+        run: ./gradlew ktlintCheck
+      #      # Ktlint
+      #      - name: Gradle Run Ktlint
+      #        run: ./gradlew ktlintFormat
       # Run Test Case
       - name: Gradle Run Test
         run: ./gradlew test
