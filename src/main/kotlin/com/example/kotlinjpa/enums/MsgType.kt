@@ -4,7 +4,7 @@ enum class MsgType constructor(
     private val code: String
 ) {
 
-    //Same Email Exception
+    // Same Email Exception
     SameEmailError("D001"),
 
     // system error

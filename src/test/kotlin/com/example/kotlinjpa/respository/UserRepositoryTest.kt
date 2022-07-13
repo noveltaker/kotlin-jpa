@@ -19,7 +19,6 @@ internal class UserRepositoryTest {
     @Autowired
     private lateinit var userRepository: UserRepository
 
-
     @Test
     fun `단일 유저 저장`() {
 

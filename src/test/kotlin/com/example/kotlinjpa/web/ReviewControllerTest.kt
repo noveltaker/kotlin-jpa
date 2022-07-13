@@ -69,6 +69,5 @@ internal class ReviewControllerTest {
             .andExpect(jsonPath("$['user']['id']").value(user.getId()))
             .andExpect(jsonPath("$['user']['email']").value(user.getEmail()))
             .andExpect(jsonPath("$['user']['password']").value(user.getPassword()))
-
     }
 }
