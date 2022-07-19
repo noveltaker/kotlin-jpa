@@ -26,6 +26,9 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     implementation("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.ehcache:ehcache:3.6.2")
+    implementation("javax.cache:cache-api:1.1.0")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
 }
 
 tasks.withType<KotlinCompile> {
