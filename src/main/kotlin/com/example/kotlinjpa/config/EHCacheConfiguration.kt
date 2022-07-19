@@ -38,8 +38,7 @@ class EHCacheConfiguration {
                 Any::class.java,
                 Any::class.java,
                 ResourcePoolsBuilder.newResourcePoolsBuilder()
-                    .heap(2, MemoryUnit.MB)
-                    .offheap(2, MemoryUnit.MB)
+                    .heap(500, MemoryUnit.KB)
                     .build()
             )
             .withExpiry(ExpiryPolicyBuilder.timeToIdleExpiration(Duration.ofSeconds(10)))
