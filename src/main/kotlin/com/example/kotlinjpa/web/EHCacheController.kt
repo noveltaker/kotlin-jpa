@@ -3,7 +3,6 @@ package com.example.kotlinjpa.web
 import com.example.kotlinjpa.service.EHCacheService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
-import java.math.BigDecimal
 
 @RestController
 class EHCacheController constructor(
@@ -11,5 +10,5 @@ class EHCacheController constructor(
 ) {
 
     @GetMapping("num")
-    fun getNum(num: Int): BigDecimal = ehCacheService.getNum(num)
+    fun getNum(num: Int): Int = ehCacheService.getNum(num)
 }
